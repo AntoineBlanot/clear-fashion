@@ -62,8 +62,10 @@ console.log(marketplace_len);
 
 
 var brands_name = [];
-MY_FAVORITE_BRANDS.forEach(brand => {
-  brands_name.push(brand.name);
+marketplace.forEach(place => {
+  if (!brands_name.includes(place.brand)){
+    brands_name.push(place.brand);
+  }
 });
 console.log(brands_name);
 console.log(brands_name.length);
@@ -86,6 +88,11 @@ console.log(sorted_marketplace);
 // 1. Create a function to sort the marketplace objects by products date
 // 2. Create a variable and assign it the list of products by date from recent to old
 // 3. Log the variable
+
+
+function SortByDate(array){
+  return array.sort((x, y) => Date.parse(y.date) - Date.parse(x.date));
+}
 
 
 // 🎯 TODO: Filter a specific price range
