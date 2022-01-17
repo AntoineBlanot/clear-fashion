@@ -111,7 +111,8 @@ console.log(price_range_filter);
 // 2. Log the average
 
 
-
+var average_marketplace = marketplace.map(place =>place.price).reduce((x, y) => x + y)/marketplace.length;
+console.log(average_marketplace);
 
 
 /**
