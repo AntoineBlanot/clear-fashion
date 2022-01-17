@@ -138,6 +138,14 @@ console.log(average_marketplace);
 // 2. Log the variable
 // 3. Log the number of products by brands
 
+console.log(brands_name.forEach(name => marketplace.filer(x => x.brand == name)));
+brands_name.forEach(name => marketplace.filer(x => x.brand == name))
+console.log(obj);
+marketplace.forEach(function(entry) {
+    obj[entry.brand] = obj[entry.brand].push(entry);
+});
+console.log(obj);
+
 
 // 🎯 TODO: Sort by price for each brand
 // 1. For each brand, sort the products by price, from highest to lowest
