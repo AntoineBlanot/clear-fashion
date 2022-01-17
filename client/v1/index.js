@@ -75,6 +75,13 @@ console.log(brands_name.length);
 // 3. Log the variable
 
 
+function SortByPrice(array){
+  return array.sort((x, y) => x.price - y.price);
+}
+var sorted_marketplace = SortByPrice(marketplace);
+console.log(sorted_marketplace);
+
+
 // 🎯 TODO: Sort by date
 // 1. Create a function to sort the marketplace objects by products date
 // 2. Create a variable and assign it the list of products by date from recent to old
