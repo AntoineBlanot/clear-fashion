@@ -80,8 +80,8 @@ console.log(brands_name.length);
 function SortByPrice(array){
   return array.sort((x, y) => x.price - y.price);
 }
-var sorted_marketplace = SortByPrice(marketplace);
-console.log(sorted_marketplace);
+var price_sorted_marketplace = SortByPrice(marketplace);
+console.log(price_sorted_marketplace);
 
 
 // 🎯 TODO: Sort by date
@@ -93,11 +93,16 @@ console.log(sorted_marketplace);
 function SortByDate(array){
   return array.sort((x, y) => Date.parse(y.date) - Date.parse(x.date));
 }
+var date_sorted_marketplace = SortByDate(marketplace);
+console.log(date_sorted_marketplace);
 
 
 // 🎯 TODO: Filter a specific price range
 // 1. Filter the list of products between 50€ and 100€
 // 2. Log the list
+
+
+
 
 
 // 🎯 TODO: Average Basket
