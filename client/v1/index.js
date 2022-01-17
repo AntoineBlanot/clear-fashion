@@ -61,6 +61,14 @@ console.log(marketplace_len);
 // 3. Log how many brands we have
 
 
+var brands_name = [];
+MY_FAVORITE_BRANDS.forEach(brand => {
+  brands_name.push(brand.name);
+});
+console.log(brands_name);
+console.log(brands_name.length);
+
+
 // 🎯 TODO: Sort by price
 // 1. Create a function to sort the marketplace products by price
 // 2. Create a variable and assign it the list of products by price from lowest to highest
