@@ -102,7 +102,8 @@ console.log(date_sorted_marketplace);
 // 2. Log the list
 
 
-
+var price_range_filter = marketplace.filter(place => place.price >= 50 && place.price <= 100)
+console.log(price_range_filter);
 
 
 // 🎯 TODO: Average Basket
