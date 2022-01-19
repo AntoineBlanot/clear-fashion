@@ -32,9 +32,8 @@ console.log(MY_FAVORITE_BRANDS[0]);
 // I can find on these e-shops
 // 2. Log the variable
 
-
 var cheapest_tshirt = "https://www.loom.fr/products/le-t-shirt";
-console.log(cheapest_tshirt);
+console.log(`Cheapest t-shirt: ${cheapest_tshirt}`);
 
 
 /**
@@ -50,9 +49,8 @@ console.log(cheapest_tshirt);
 // 1. Create a variable and assign it the number of products
 // 2. Log the variable
 
-
 var marketplace_len = marketplace.length;
-console.log(marketplace_len);
+console.log(`Number of products : ${marketplace_len}`);
 
 
 // 🎯 TODO: Brands name
@@ -60,22 +58,20 @@ console.log(marketplace_len);
 // 2. Log the variable
 // 3. Log how many brands we have
 
-
 var brands_name = [];
 marketplace.forEach(place => {
   if (!brands_name.includes(place.brand)){
     brands_name.push(place.brand);
   }
 });
-console.log(brands_name);
-console.log(brands_name.length);
+console.log(`Brands names: ${brands_name}`);
+console.log(`Number of brands: ${brands_name.length}`);
 
 
 // 🎯 TODO: Sort by price
 // 1. Create a function to sort the marketplace products by price
 // 2. Create a variable and assign it the list of products by price from lowest to highest
 // 3. Log the variable
-
 
 function SortByPrice(array){
   return array.sort((x, y) => x.price - y.price);
@@ -89,7 +85,6 @@ console.log(price_sorted_marketplace);
 // 2. Create a variable and assign it the list of products by date from recent to old
 // 3. Log the variable
 
-
 function SortByDate(array){
   return array.sort((x, y) => Date.parse(y.date) - Date.parse(x.date));
 }
@@ -101,7 +96,6 @@ console.log(date_sorted_marketplace);
 // 1. Filter the list of products between 50€ and 100€
 // 2. Log the list
 
-
 var price_range_filter = marketplace.filter(place => place.price >= 50 && place.price <= 100)
 console.log(price_range_filter);
 
@@ -110,9 +104,8 @@ console.log(price_range_filter);
 // 1. Determine the average basket of the marketplace
 // 2. Log the average
 
-
 var average_marketplace = marketplace.map(place =>place.price).reduce((x, y) => x + y)/marketplace.length;
-console.log(average_marketplace);
+console.log(`Average basket of the marketplace: ${average_marketplace}`);
 
 
 /**
@@ -137,6 +130,16 @@ console.log(average_marketplace);
 //
 // 2. Log the variable
 // 3. Log the number of products by brands
+
+var brands_map = new Map();
+marketplace.forEach(place => {
+  if (brands_map.get(place.brand) == undefined) {
+    brands_map.set(place.brand, [])
+  }
+  brands_map.get(place.brand).push(place);
+})
+var brands = Object.fromEntries(brands_map);
+console.log(brands);
 
 
 // 🎯 TODO: Sort by price for each brand
