@@ -180,7 +180,6 @@ Object.keys(brands_sort_price).forEach(brand => {
 console.log(p90_values);
 
 
-
 /**
  * 🧥
  * Cool for your effort.
@@ -252,6 +251,12 @@ const COTELE_PARIS = [
 // 🎯 TODO: New released products
 // // 1. Log if we have new products only (true or false)
 // // A new product is a product `released` less than 2 weeks.
+
+var new_released = COTELE_PARIS.map(product => { 
+  var days = (Date.now() - new Date(product.date)) / (1000 * 60 * 60 * 24);
+  return days <= 14;
+})
+console.log(new_released.every(v => v == true));
 
 
 // 🎯 TODO: Reasonable price
