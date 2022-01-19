@@ -299,6 +299,13 @@ jacket.favorite = true;
 // 1. Log `blueJacket` and `jacket` variables
 // 2. What do you notice?
 
+console.log(blueJacket);
+console.log(jacket);
+
+// we observe that blueJacket has also the new property 'favorite' even if it was only declared on 
+// the jacket variable
+// we can assume that jacket is not a deep copy of blueJacket but maybe just a pointer (reference) to blueJacket variable
+
 blueJacket = {
   'link': 'https://coteleparis.com/collections/tous-les-produits-cotele/products/la-veste-bleu-roi',
   'price': 110,
@@ -307,8 +314,12 @@ blueJacket = {
 
 // 3. Update `jacket` property with `favorite` to true WITHOUT changing blueJacket properties
 
+jacket = JSON.parse(JSON.stringify(blueJacket)); 
+jacket.favorite = true;
 
-
+console.log(blueJacket);
+console.log(jacket);
+// now, blueJacket is not changed, because we made a deep copy of it
 
 
 /**
