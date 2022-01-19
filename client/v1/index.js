@@ -146,17 +146,20 @@ console.log(brands);
 // 1. For each brand, sort the products by price, from highest to lowest
 // 2. Log the sort
 
-var brands_sort_price = brands
-Object.keys(brands_sort_price).forEach(key => {
+Object.keys(brands).forEach(key => {
   brands[key].sort((x, y) => y.price - x.price);
 })
-console.log(brands_sort_price);
+console.log(brands);
+
 
 // 🎯 TODO: Sort by date for each brand
 // 1. For each brand, sort the products by date, from old to recent
 // 2. Log the sort
 
-
+Object.keys(brands).forEach(key => {
+  brands[key].sort((x, y) => Date.parse(x.date) - Date.parse(y.date));
+})
+console.log(brands);
 
 
 
