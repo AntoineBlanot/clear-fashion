@@ -263,10 +263,16 @@ console.log(new_released.every(v => v == true));
 // // 1. Log if coteleparis is a reasonable price shop (true or false)
 // // A reasonable price if all the products are less than 100€
 
+var reasoable_price = COTELE_PARIS.map(product => product.price < 100);
+console.log(reasoable_price.every(v => v === true));
+
 
 // 🎯 TODO: Find a specific product
 // 1. Find the product with the uuid `b56c6d88-749a-5b4c-b571-e5b5c6483131`
 // 2. Log the product
+
+var product = COTELE_PARIS.filter(p => p.uuid === 'b56c6d88-749a-5b4c-b571-e5b5c6483131')[0];
+console.log(product);
 
 
 // 🎯 TODO: Delete a specific product
