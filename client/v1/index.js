@@ -146,21 +146,16 @@ console.log(brands);
 // 1. For each brand, sort the products by price, from highest to lowest
 // 2. Log the sort
 
-Object.keys(brands).forEach(key => {
-  brands[key].sort((x, y) => y.price - x.price);
-})
-console.log(brands);
+const brands_sort_price = Object.fromEntries(brands_map);
+Object.values(brands_sort_price).forEach(product => product.sort((x, y) => y.price - x.price));
+console.log(brands_sort_price);
 
 
 // 🎯 TODO: Sort by date for each brand
 // 1. For each brand, sort the products by date, from old to recent
 // 2. Log the sort
 
-Object.keys(brands).forEach(key => {
-  brands[key].sort((x, y) => Date.parse(x.date) - Date.parse(y.date));
-})
-console.log(brands);
-
+// when I do the sort for this one, it changes the sort for the previous TODO, dont know why ?
 
 
 /**
