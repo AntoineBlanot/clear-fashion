@@ -100,8 +100,8 @@ var price_range_filter = marketplace.filter(place => place.price >= 50 && place.
 console.log(price_range_filter);
 
 
-// 🎯 TODO: Average Basket
-// 1. Determine the average basket of the marketplace
+// 🎯 TODO: Average price
+// 1. Determine the average price of the marketplace
 // 2. Log the average
 
 var average_marketplace = marketplace.map(place =>place.price).reduce((x, y) => x + y)/marketplace.length;
