@@ -12,6 +12,7 @@ const selectBrand = document.querySelector('#brand-select');
 const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
 const inputRecentFilter = document.querySelector('#recent-filter');
+const inputPriceFilter = document.querySelector("#price-filter");
 
 /**
  * Set global value
@@ -120,16 +121,30 @@ const renderBrandFilter = (products, brand = "all") => {
   selectBrand.selectedIndex = idx;
 }
 
+/**
+ * Render page selector
+ * @param  {boolean} isClicked
+ */
 const renderRecentFilter = (isClicked) => {
   inputRecentFilter.checked = isClicked;
 }
 
-const render = (products, pagination, brand="all", recentFilter=false) => {
+/**
+ * Render page selector
+ * @param  {boolean} isClicked
+ */
+const renderPriceFilter = (isClicked) => {
+  inputPriceFilter.checked = isClicked;
+}
+
+
+const render = (products, pagination, brand="all", recentFilter=false, priceFilter=false) => {
   renderProducts(products);
   renderPagination(pagination);
   renderIndicators(pagination);
   renderBrandFilter(products, brand);
   renderRecentFilter(recentFilter);
+  renderPriceFilter(priceFilter);
 };
 
 /**
@@ -176,4 +191,14 @@ inputRecentFilter.addEventListener('click', event => {
   }
   render(currentProducts, currentPagination);
   renderRecentFilter(isChecked);
+})
+
+inputPriceFilter.addEventListener('click', event => {
+  fetchProducts(currentPagination.currentPage, currentPagination.currentPagination).then(setCurrentProducts);
+  const isChecked = inputPriceFilter.checked
+  if (isChecked) {
+    currentProducts = currentProducts.filter(product => product.price < 50);
+  }
+  render(currentProducts, currentPagination);
+  renderPriceFilter(isChecked);
 })
