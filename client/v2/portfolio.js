@@ -8,6 +8,7 @@ let currentPagination = {};
 // instantiate the selectors
 const selectShow = document.querySelector('#show-select');
 const selectPage = document.querySelector('#page-select');
+const selectBrand = document.querySelector('#brand-select');
 const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
 
@@ -96,10 +97,33 @@ const renderIndicators = pagination => {
   spanNbProducts.innerHTML = count;
 };
 
-const render = (products, pagination) => {
+/**
+ * Render page selector
+ * @param  {Array} products
+ */
+const renderBrandFilter = (products, brand = "all") => {
+  var brands_name = ["all"];
+  products.forEach(product => {
+    if (!brands_name.includes(product.brand)){
+      brands_name.push(product.brand);
+  }
+  });
+  
+  const options = Array.from(
+    {'length': brands_name.length},
+    (value, index) => `<option value="${brands_name[index]}">${brands_name[index]}</option>`)
+    .join('')
+    
+  selectBrand.innerHTML = options;
+  const idx = brands_name.indexOf(brand)
+  selectBrand.selectedIndex = idx;
+}
+
+const render = (products, pagination, brand) => {
   renderProducts(products);
   renderPagination(pagination);
   renderIndicators(pagination);
+  renderBrandFilter(products, brand);
 };
 
 /**
@@ -128,3 +152,12 @@ selectPage.addEventListener('change', event => {
     .then(setCurrentProducts)
     .then(() => render(currentProducts, currentPagination))
 });
+
+selectBrand.addEventListener('change', event => {
+  fetchProducts(currentPagination.currentPage, currentPagination.currentPagination).then(setCurrentProducts);
+  const brand = event.target.value;
+  if (brand != "all")
+    currentProducts = currentProducts.filter(product => product.brand === event.target.value);
+
+  render(currentProducts, currentPagination, brand);
+})
