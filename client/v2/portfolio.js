@@ -18,6 +18,7 @@ const spanNbNewProducts = document.querySelector('#nbNewProducts');
 const spanp50 = document.querySelector("#p50");
 const spanp90 = document.querySelector("#p90");
 const spanp95 = document.querySelector("#p95");
+const spanLastRelease = document.querySelector("#last-release");
 
 const inputRecentFilter = document.querySelector('#recent-filter');
 const inputPriceFilter = document.querySelector("#price-filter");
@@ -110,6 +111,8 @@ const renderIndicators = pagination => {
   spanp50.innerHTML = currentProducts.sort((p1, p2) => p1.price - p2.price)[Math.floor(currentProducts.length * 0.5)].price;
   spanp90.innerHTML = currentProducts.sort((p1, p2) => p1.price - p2.price)[Math.floor(currentProducts.length * 0.9)].price;
   spanp95.innerHTML = currentProducts.sort((p1, p2) => p1.price - p2.price)[Math.floor(currentProducts.length * 0.95)].price;
+
+  spanLastRelease.innerHTML = currentProducts.sort((p1, p2) => Date.parse(p2.released) - Date.parse(p1.released))[0].released;
 };
 
 /**
