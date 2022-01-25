@@ -190,8 +190,10 @@ selectSort.addEventListener('change', event => {
   fetchProducts(currentPagination.currentPage, currentPagination.currentPagination).then(setCurrentProducts);
   const sort = event.target.value;
   switch (sort) {
-    case "price-asc" :
+    case "price-asc":
       currentProducts.sort((p1, p2) => p1.price - p2.price);
+    case "price-desc":
+      currentProducts.sort((p1, p2) => p2.price - p1.price);
   }
   render(currentProducts, currentPagination, brand);
 });
