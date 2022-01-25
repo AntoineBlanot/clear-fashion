@@ -9,8 +9,11 @@ let currentPagination = {};
 const selectShow = document.querySelector('#show-select');
 const selectPage = document.querySelector('#page-select');
 const selectBrand = document.querySelector('#brand-select');
+const selectSort = document.querySelector('#sort-select');
+
 const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
+
 const inputRecentFilter = document.querySelector('#recent-filter');
 const inputPriceFilter = document.querySelector("#price-filter");
 
@@ -181,7 +184,17 @@ selectBrand.addEventListener('change', event => {
     currentProducts = currentProducts.filter(product => product.brand === event.target.value);
 
   render(currentProducts, currentPagination, brand);
-})
+});
+
+selectSort.addEventListener('change', event => {
+  fetchProducts(currentPagination.currentPage, currentPagination.currentPagination).then(setCurrentProducts);
+  const sort = event.target.value;
+  switch (sort) {
+    case "price-asc" :
+      currentProducts.sort((p1, p2) => p1.price - p2.price);
+  }
+  render(currentProducts, currentPagination, brand);
+});
 
 inputRecentFilter.addEventListener('click', event => {
   fetchProducts(currentPagination.currentPage, currentPagination.currentPagination).then(setCurrentProducts);
@@ -191,7 +204,7 @@ inputRecentFilter.addEventListener('click', event => {
   }
   render(currentProducts, currentPagination);
   renderRecentFilter(isChecked);
-})
+});
 
 inputPriceFilter.addEventListener('click', event => {
   fetchProducts(currentPagination.currentPage, currentPagination.currentPagination).then(setCurrentProducts);
@@ -201,4 +214,4 @@ inputPriceFilter.addEventListener('click', event => {
   }
   render(currentProducts, currentPagination);
   renderPriceFilter(isChecked);
-})
+});
