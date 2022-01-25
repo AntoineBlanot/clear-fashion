@@ -192,17 +192,25 @@ selectSort.addEventListener('change', event => {
   switch (sort) {
     case "price-asc":
       currentProducts.sort((p1, p2) => p1.price - p2.price);
+      break;
     case "price-desc":
       currentProducts.sort((p1, p2) => p2.price - p1.price);
+      break;
+    case "date-asc":
+      currentProducts.sort((p1, p2) => Date.parse(p2.released) - Date.parse(p1.released));
+      break;
+    case "date-desc":
+      currentProducts.sort((p1, p2) => Date.parse(p1.released) - Date.parse(p2.released));
+      break;
   }
-  render(currentProducts, currentPagination, brand);
+  render(currentProducts, currentPagination);
 });
 
 inputRecentFilter.addEventListener('click', event => {
   fetchProducts(currentPagination.currentPage, currentPagination.currentPagination).then(setCurrentProducts);
   const isChecked = inputRecentFilter.checked
   if (isChecked) {
-    currentProducts = currentProducts.filter(product => (Date.now() - new Date(product.date)) / (1000 * 60 * 60 * 24) <= 14);
+    currentProducts = currentProducts.filter(product => (Date.now() - new Date(product.released)) / (1000 * 60 * 60 * 24) <= 14);
   }
   render(currentProducts, currentPagination);
   renderRecentFilter(isChecked);
