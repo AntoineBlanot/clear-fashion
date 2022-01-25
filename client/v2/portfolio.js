@@ -12,7 +12,9 @@ const selectBrand = document.querySelector('#brand-select');
 const selectSort = document.querySelector('#sort-select');
 
 const sectionProducts = document.querySelector('#products');
+
 const spanNbProducts = document.querySelector('#nbProducts');
+const spanNbNewProducts = document.querySelector('#nbNewProducts')
 
 const inputRecentFilter = document.querySelector('#recent-filter');
 const inputPriceFilter = document.querySelector("#price-filter");
@@ -100,6 +102,7 @@ const renderIndicators = pagination => {
   const {count} = pagination;
 
   spanNbProducts.innerHTML = count;
+  spanNbNewProducts.innerHTML = currentProducts.filter(product => (Date.now() - new Date(product.released)) / (1000 * 60 * 60 * 24) <= 14).length;
 };
 
 /**
