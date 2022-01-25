@@ -11,6 +11,7 @@ const selectPage = document.querySelector('#page-select');
 const selectBrand = document.querySelector('#brand-select');
 const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
+const inputRecentFilter = document.querySelector('#recent-filter');
 
 /**
  * Set global value
@@ -119,11 +120,16 @@ const renderBrandFilter = (products, brand = "all") => {
   selectBrand.selectedIndex = idx;
 }
 
-const render = (products, pagination, brand) => {
+const renderRecentFilter = (isClicked) => {
+  inputRecentFilter.checked = isClicked;
+}
+
+const render = (products, pagination, brand="all", recentFilter=false) => {
   renderProducts(products);
   renderPagination(pagination);
   renderIndicators(pagination);
   renderBrandFilter(products, brand);
+  renderRecentFilter(recentFilter);
 };
 
 /**
@@ -160,4 +166,14 @@ selectBrand.addEventListener('change', event => {
     currentProducts = currentProducts.filter(product => product.brand === event.target.value);
 
   render(currentProducts, currentPagination, brand);
+})
+
+inputRecentFilter.addEventListener('click', event => {
+  fetchProducts(currentPagination.currentPage, currentPagination.currentPagination).then(setCurrentProducts);
+  const isChecked = inputRecentFilter.checked
+  if (isChecked) {
+    currentProducts = currentProducts.filter(product => (Date.now() - new Date(product.date)) / (1000 * 60 * 60 * 24) <= 14);
+  }
+  render(currentProducts, currentPagination);
+  renderRecentFilter(isChecked);
 })
