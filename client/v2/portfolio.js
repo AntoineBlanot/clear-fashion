@@ -4,6 +4,7 @@
 // current products on the page
 let currentProducts = [];
 let currentPagination = {};
+let favoriteProducts = [];
 
 // instantiate the selectors
 const selectShow = document.querySelector('#show-select');
@@ -22,6 +23,8 @@ const spanLastRelease = document.querySelector("#last-release");
 
 const inputRecentFilter = document.querySelector('#recent-filter');
 const inputPriceFilter = document.querySelector("#price-filter");
+const inputFavorite = document.querySelector("#fav-product");
+
 
 /**
  * Set global value
@@ -69,6 +72,7 @@ const renderProducts = products => {
     .map(product => {
       return `
       <div class="product" id=${product.uuid}>
+        <input type="checkbox" id="fav-product">fav</input>
         <span>${product.brand}</span>
         <a href="${product.link}" target="_blank">${product.name}</a>
         <span>${product.price}</span>
@@ -238,3 +242,10 @@ inputPriceFilter.addEventListener('click', event => {
   render(currentProducts, currentPagination);
   renderPriceFilter(isChecked);
 });
+
+/*
+alert(sectionProducts);
+let allChildren = sectionProducts.children;
+let c = allChildren[1].children;
+Array.from(c).forEach(item => item.classList.add("red"));
+*/
