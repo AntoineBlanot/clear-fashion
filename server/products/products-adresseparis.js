@@ -1,5 +1,5 @@
 /* eslint-disable no-console, no-process-exit */
-const dedicatedbrand = require('./sources/adresseparisbrand');
+const dedicatedbrand = require('../sources/adresseparisbrand');
 
 async function sandbox (eshop = 'https://adresse.paris/630-toute-la-collection') {
   try {
@@ -24,6 +24,11 @@ async function sandbox (eshop = 'https://adresse.paris/630-toute-la-collection')
             })
         }
 
+        // Add a new property brand to each object in the list
+        newProducts.forEach(product => {
+          product.brand = 'adresseparis'
+        });
+        // Count number of new product
         nbNewProducts = newProducts.length;
 
         console.log(`Page ${page} processed with ${nbNewProducts} new products`);
@@ -35,12 +40,13 @@ async function sandbox (eshop = 'https://adresse.paris/630-toute-la-collection')
         }
     }
 
-    console.log('done');
-    console.log('All products: ');
-    console.log(products);
-    console.log(`Number of products: ${products.length}`);
+    console.log(`Adresseparis has been scrapped with ${products.length} products`);
+    //console.log('All products: ');
+    //console.log(products);
+    
+    return products;
 
-    process.exit(0);
+    //process.exit(0);
   } catch (e) {
     console.error(e);
     process.exit(1);
@@ -48,5 +54,6 @@ async function sandbox (eshop = 'https://adresse.paris/630-toute-la-collection')
 }
 
 const [,, eshop] = process.argv;
+//sandbox(eshop);
 
-sandbox(eshop);
+module.exports.getProducts = sandbox();
