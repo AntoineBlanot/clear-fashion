@@ -1,5 +1,5 @@
 /* eslint-disable no-console, no-process-exit */
-const dedicatedbrand = require('./sources/montlimartbrand');
+const dedicatedbrand = require('../sources/montlimartbrand');
 
 async function sandbox (eshop = 'https://www.montlimart.com/toute-la-collection.html') {
   try {
@@ -23,6 +23,11 @@ async function sandbox (eshop = 'https://www.montlimart.com/toute-la-collection.
         })
       }
 
+      // Add a new property brand to each object in the list
+      newProducts.forEach(product => {
+        product.brand = 'montlimard'
+      });
+      // Count number of new product
       nbNewProducts = newProducts.length;
 
       console.log(`Page ${page} processed with ${nbNewProducts} new products`);
@@ -34,10 +39,9 @@ async function sandbox (eshop = 'https://www.montlimart.com/toute-la-collection.
       }
     }
 
-    console.log('done');
-    console.log('All products');
-    console.log(products);
-    console.log(`Number of products: ${products.length}`);
+    console.log(`Montimard has been scrapped with ${products.length} products`);
+    //console.log('All products: ');
+    //console.log(products);
 
     process.exit(0);
   } catch (e) {
@@ -47,5 +51,6 @@ async function sandbox (eshop = 'https://www.montlimart.com/toute-la-collection.
 }
 
 const [,, eshop] = process.argv;
+//sandbox(eshop);
 
-sandbox(eshop);
+module.exports.getProducts = sandbox();
