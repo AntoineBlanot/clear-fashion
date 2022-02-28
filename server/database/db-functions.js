@@ -1,5 +1,6 @@
 const adresseparis = require('../products/products-adresseparis');
-const montlimard = require('../products/products-montlimard')
+const montlimard = require('../products/products-montlimard');
+const dedicatedbrand = require('../products/products-dedicatedbrand');
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
@@ -78,7 +79,25 @@ async function insertMontlimardProducts() {
   }
 }
 
-insertAdresseparisProducts().catch(console.dir);
-// insertMontlimardProducts().catch(console.dir);
+async function insertDedicatedbrandProducts() {
 
+  const products = await dedicatedbrand.getProducts;
+
+  try {
+    await client.connect();
+
+    const COLLECTION_NAME = "products";
+    const collection = client.db(DATABASE_NAME).collection(COLLECTION_NAME);
+
+    const result = await collection.insertMany(products);
+
+    console.log(`Documents added to the ${DATABASE_NAME}/${COLLECTION_NAME} collection : ${result.insertedIds}`);
+  } finally {
+    await client.close();
+  }
+}
 // cleanCollection();
+
+// insertAdresseparisProducts().catch(console.dir);
+// insertMontlimardProducts().catch(console.dir);
+// insertDedicatedbrandProducts().catch(console.dir);
