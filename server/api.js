@@ -44,24 +44,37 @@ app.get('/products', (request, response) => {
   });
 });
 
-app.get('/products/search', (request, response) => {
-  console.log("In search");
-  var limit, brand, price;
-  if(req.query){
-    limit = req.query.limit;
-    brand = req.query.brand;
-    price = req.query.price;
-  }
-  console.log(limit);
-  console.log(brand);
-  console.log(price);
+app.get('/search', (request, response) => {
 
-  collection.find({ "brand": brand, "price": price}).sort({ price: 1 }).limit(limit).toArray((error, result) => {
+  var filters = {};
+  var limit, brand, price;
+
+  limit = parseInt(request.query.limit, 10);
+
+  if(request.query.brand !== undefined){
+    brand = request.query.brand,
+    filters["brand"] = brand;
+  }
+  if(request.query.price !== undefined){
+    price = parseInt(request.query.price, 10);
+    filters["price"] = price;
+  }
+
+  if(limit === undefined){
+    collection.find(filters).sort({ price: 1 }).toArray((error, result) => {
       if(error) {
           return response.status(500).send(error);
       }
       response.send(result);
-  });
+    });
+  } else {
+    collection.find(filters).sort({ price: 1 }).limit(limit).toArray((error, result) => {
+      if(error) {
+          return response.status(500).send(error);
+      }
+      response.send(result);
+    });
+  }
 });
 
 app.listen(PORT, () => {
