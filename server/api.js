@@ -43,7 +43,7 @@ app.get('/products/search', (request, response) => {
   }
 
   if(limit === undefined){
-    collection.find(filters).sort({ price: 1 }).toArray((error, result) => {
+    collection.find(filters).sort({ price: 1 }).limit(12).toArray((error, result) => {
       if(error) {
           return response.status(500).send(error);
       }
