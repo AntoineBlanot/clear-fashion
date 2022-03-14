@@ -85,7 +85,8 @@ app.listen(PORT, () => {
     database = client.db(DATABASE_NAME);
     collection = database.collection("products");
     console.log("Connected to `" + DATABASE_NAME + "`!");
+    console.log(`📡 Running on port ${PORT}`);
   });
 });
 
-console.log(`📡 Running on port ${PORT}`);
+module.exports = app;
