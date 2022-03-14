@@ -12,9 +12,8 @@ const client = new MongoClient(URI, { useNewUrlParser: true, useUnifiedTopology:
 const PORT = 8092;
 
 const app = express();
-var database, collection;
 
-module.exports = app;
+var database, collection;
 
 app.use(require('body-parser').json());
 app.use(cors());
@@ -89,4 +88,5 @@ app.listen(PORT, () => {
   });
 });
 
+// Export the Express API
 module.exports = app;
