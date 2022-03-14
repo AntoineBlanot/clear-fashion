@@ -26,25 +26,7 @@ app.get('/', (request, response) => {
   response.send({'ack': true});
 });
 
-app.get('/products/:id', (request, response) => {
-  collection.findOne({ "_id": request.params.id}, (error, result) => {
-      if(error) {
-          return response.status(500).send(error);
-      }
-      response.send(result);
-  });
-});
-
-app.get('/products', (request, response) => {
-  collection.find({ }).toArray((error, result) => {
-      if(error) {
-          return response.status(500).send(error);
-      }
-      response.send(result);
-  });
-});
-
-app.get('/search', (request, response) => {
+app.get('/products/search', (request, response) => {
 
   var filters = {};
   var limit, brand, price;
@@ -75,6 +57,24 @@ app.get('/search', (request, response) => {
       response.send(result);
     });
   }
+});
+
+app.get('/products/:id', (request, response) => {
+  collection.findOne({ "_id": new ObjectId(request.params.id)}, (error, result) => {
+      if(error) {
+          return response.status(500).send(error);
+      }
+      response.send(result);
+  });
+});
+
+app.get('/products', (request, response) => {
+  collection.find({ }).toArray((error, result) => {
+      if(error) {
+          return response.status(500).send(error);
+      }
+      response.send(result);
+  });
 });
 
 app.listen(PORT, () => {
