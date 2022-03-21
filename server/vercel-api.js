@@ -20,7 +20,7 @@ app.get('/', async (request, response) => {
 });
 
 app.get('/products/search', async (request, response) => {
-    var filters = {};
+    const filters = {};
     var brand, price;
     const size = parseInt(request.query.size, 10) || 12;
     const page = parseInt(request.query.page, 10) || 1;
@@ -41,7 +41,7 @@ app.get('/products/search', async (request, response) => {
         if(error) {
             return response.status(500).send(error);
         }
-        response.send({"results": result, "meta": paginate(page, count, result, limit)});
+        response.send({"data": {"result": result, "meta": paginate(page, count, result, limit)}, "success": true});
       });
 });
 
