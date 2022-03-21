@@ -6,7 +6,7 @@ const ObjectId = require("mongodb").ObjectID;
 const express = require('express');
 const app = express();
 
-const PORT = 8092;
+const { calculateLimitAndOffset, paginate } = require('paginate-info');
 
 const  DATABASE_NAME = "clear-fashion";
 var collection, client;
@@ -21,9 +21,9 @@ app.get('/', async (request, response) => {
 
 app.get('/products/search', async (request, response) => {
     var filters = {};
-    var limit, brand, price;
-  
-    limit = parseInt(request.query.limit, 10);
+    var brand, price;
+    const size = parseInt(request.query.size, 10) || 12;
+    const page = parseInt(request.query.page, 10) || 1;
   
     if(request.query.brand !== undefined){
       brand = request.query.brand,
@@ -31,24 +31,18 @@ app.get('/products/search', async (request, response) => {
     }
     if(request.query.price !== undefined){
       price = parseInt(request.query.price, 10);
-      filters["price"] = price;
+      filters["price"] = {$lte: price};
     }
-  
-    if(limit === undefined){
-      await collection.find(filters).sort({ price: 1 }).limit(12).toArray((error, result) => {
+
+    const { limit, offset } = calculateLimitAndOffset(page, size);
+    const count = await collection.count();
+
+    await collection.find(filters).sort({ price: 1 }).skip(offset).limit(limit).toArray((error, result) => {
         if(error) {
             return response.status(500).send(error);
         }
-        response.send(result);
+        response.send({"results": result, "meta": paginate(page, count, result, limit)});
       });
-    } else {
-      await collection.find(filters).sort({ price: 1 }).limit(limit).toArray((error, result) => {
-        if(error) {
-            return response.status(500).send(error);
-        }
-        response.send(result);
-      });
-    }
 });
 
 app.get('/products/:id', async (request, response) => {
