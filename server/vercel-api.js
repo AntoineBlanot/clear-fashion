@@ -9,19 +9,17 @@ const app = express();
 const { calculateLimitAndOffset, paginate } = require('paginate-info');
 
 const  DATABASE_NAME = "clear-fashion";
-const client = await clientPromise;
-const collection = await client.db(DATABASE_NAME).collection("products");
-
 
 app.get('/', async (request, response) => {
-    // client = await clientPromise;
-    // collection = await client.db(DATABASE_NAME).collection("products");
-    console.log("Connected to `" + DATABASE_NAME + "`!");
+    const client = await clientPromise;
+    console.log("Connected to `" + client.db().databaseName + "` database !");
     response.send({'ack': true, 'dbConnection' : true, 'dbName': client.db().databaseName});
 });
 
 app.get('/products/search', async (request, response) => {
-    console.log(collection)
+    const client = await clientPromise;
+    const collection = await client.db(DATABASE_NAME).collection("products");
+
     const filters = {};
     var brand, price;
     const size = parseInt(request.query.size, 10) || 12;
@@ -37,7 +35,7 @@ app.get('/products/search', async (request, response) => {
     }
 
     const { limit, offset } = calculateLimitAndOffset(page, size);
-    const count = await collection.count();
+    const count = collection.count();
 
     await collection.find(filters).sort({ price: 1 }).skip(offset).limit(limit).toArray((error, result) => {
         if(error) {
@@ -48,6 +46,9 @@ app.get('/products/search', async (request, response) => {
 });
 
 app.get('/products/:id', async (request, response) => {
+    const client = await clientPromise;
+    const collection = await client.db(DATABASE_NAME).collection("products");
+
     await collection.findOne({ "_id": new ObjectId(request.params.id)}, (error, result) => {
         if(error) {
             return response.status(500).send(error);
@@ -57,6 +58,9 @@ app.get('/products/:id', async (request, response) => {
   });
 
 app.get('/products', async (request, response) => {
+    const client = await clientPromise;
+    const collection = await client.db(DATABASE_NAME).collection("products");
+
     await collection.find({ }).toArray((error, result) => {
         if(error) {
             return response.status(500).send(error);
