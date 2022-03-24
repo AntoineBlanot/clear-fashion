@@ -7,6 +7,7 @@
       "dest": "vercel-api.js",
       "headers": 
       {
+        "_comment": "Has to put that here, also the server side API has to be open in the same navigator than the client side API",
         "Access-Control-Allow-Credentials": "true",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
