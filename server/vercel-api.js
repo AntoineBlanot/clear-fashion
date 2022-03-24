@@ -20,6 +20,7 @@ app.get('/', async (request, response) => {
 });
 
 app.get('/products/search', async (request, response) => {
+    console.log(collection)
     const filters = {};
     var brand, price;
     const size = parseInt(request.query.size, 10) || 12;
