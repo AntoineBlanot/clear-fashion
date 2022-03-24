@@ -9,12 +9,13 @@ const app = express();
 const { calculateLimitAndOffset, paginate } = require('paginate-info');
 
 const  DATABASE_NAME = "clear-fashion";
-var collection, client;
+const client = await clientPromise;
+const collection = await client.db(DATABASE_NAME).collection("products");
 
 
 app.get('/', async (request, response) => {
-    client = await clientPromise;
-    collection = await client.db(DATABASE_NAME).collection("products");
+    // client = await clientPromise;
+    // collection = await client.db(DATABASE_NAME).collection("products");
     console.log("Connected to `" + DATABASE_NAME + "`!");
     response.send({'ack': true, 'dbConnection' : true, 'dbName': client.db().databaseName});
 });
