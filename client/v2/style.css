@@ -1,0 +1,45 @@
+body {
+    background-color: #dcedc8;
+}
+
+h1 {
+    color: #33691e;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+h2 {
+    color: #33691e;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+div {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+section {
+    background-color: #9ccc65;
+}
+
+select {
+    /* Reset Select */
+    appearance: none;
+    outline: 0;
+    border: 0;
+    box-shadow: none;
+    /* Personalize */
+    flex: 1;
+    padding: 0 1em;
+    color: #fff;
+    background-color: black;
+    background-image: none;
+    cursor: pointer;
+}
+
+.indicator {
+    color: black;
+    margin-left: 20px;
+    margin-right: 20px;
+}
