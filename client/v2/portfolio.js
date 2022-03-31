@@ -47,14 +47,14 @@ const setCurrentProducts = ({result, meta}) => {
  */
 const fetchProducts = async (page = 1, size = 12) => {
   try {
-    const response = await fetch(
-      `https://clear-fashion-api.vercel.app?page=${page}&size=${size}`
-    );
-
     // const response = await fetch(
-    //   `https://server-chi-gray.vercel.app/products/search?page=${page}&size=${size}`, 
-    //   { headers: {origin: null} }
+    //   `https://clear-fashion-api.vercel.app?page=${page}&size=${size}`
     // );
+
+    const response = await fetch(
+      `https://server-chi-gray.vercel.app/products/search?page=${page}&size=${size}`, 
+      { headers: {origin: null} }
+    );
 
     const body = await response.json();
 
