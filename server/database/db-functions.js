@@ -80,8 +80,8 @@ async function insertMontlimardProducts() {
 }
 
 async function insertDedicatedbrandProducts() {
-
   const products = await dedicatedbrand.getProducts;
+  console.log(products);
 
   try {
     await client.connect();

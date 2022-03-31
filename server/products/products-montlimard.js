@@ -43,6 +43,7 @@ async function sandbox (eshop = 'https://www.montlimart.com/toute-la-collection.
     //console.log('All products: ');
     //console.log(products);
 
+    return products
     process.exit(0);
   } catch (e) {
     console.error(e);
